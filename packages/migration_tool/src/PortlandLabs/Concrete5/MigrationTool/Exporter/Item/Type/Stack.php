@@ -51,7 +51,11 @@ class Stack extends AbstractType
                 break;
             default:
                 $c = \Concrete\Core\Page\Stack\Stack::getByID($exportItem->getItemIdentifier());
-                $type = t('Stack');
+                if ($c && !$c->isError() && $c->getStackType() == $c::ST_TYPE_GLOBAL_AREA) {
+                    $type = t('Global Area');
+                } else {
+                    $type = t('Stack');
+                }
                 break;
         }
 
